@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Employees</title>
+</head>
+<body>
+    <h1>Show Employees</h1>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Joining Date</th>
+            <th>Department</th>
+            <th>Qualification</th>
+            <th>Actions</th>
+        </tr>
+        <% employees.forEach(employee => { %>
+            <tr>
+                <td><%= employee.name %></td>
+                <td><%= employee.email %></td>
+                <td><%= employee.phone %></td>
+                <td><%= employee.joining_date %></td>
+                <td><%= employee.department %></td>
+                <td><%= employee.qualification %></td>
+                <td>
+                    <form action="/delete-employee/<%= employee.id %>" method="post" style="display:inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+    </table>
+</body>
+</html>
