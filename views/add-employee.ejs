@@ -12,8 +12,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            padding: 20px;
             margin: 0;
+            min-height: 100vh;
         }
         .container {
             background-color: #fff;
@@ -24,34 +25,15 @@
             width: 100%;
             text-align: center;
             animation: slideIn 1s ease;
+            position: relative;
         }
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .form-container {
+            margin-bottom: 40px; /* Increased margin for space between form and buttons */
         }
-        h1 {
-            color: #333;
-        }
-        label {
-            display: inline-block;
-            width: 150px;
-            text-align: left;
-            margin-bottom: 10px;
-            color: #666;
-        }
-        input, select {
-            padding: 8px;
-            margin-bottom: 15px;
-            width: calc(100% - 18px);
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
+        .button-container {
+            display: flex;
+            flex-direction: column; /* Stack buttons vertically */
+            align-items: center; /* Center align buttons horizontally */
         }
         button {
             padding: 10px 20px;
@@ -60,34 +42,99 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin-bottom: 10px; /* Space between buttons */
         }
         button:hover {
             background-color: #45a049;
         }
+        .back-button {
+            background-color: #cc3333; /* Darker red color */
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .back-button a {
+            text-decoration: none;
+            color: #fff; /* White text color */
+            font-weight: bold;
+        }
+        .back-button a:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 10px;
+            color: #666;
+        }
+        input, select {
+            padding: 8px;
+            margin-bottom: 15px;
+            width: calc(100% - 16px);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
     </style>
+    <script>
+        function showSuccessMessage(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Display success message
+            alert("Employee added successfully!");
+
+            // Optionally, you can redirect to another page after showing the message
+            // window.location.href = "/success-page"; // Replace with your success page URL
+        }
+    </script>
 </head>
 <body>
     <div class="container">
         <h1>Add Employee</h1>
-        <form action="/add-employee" method="post">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required><br><br>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required><br><br>
-            <label for="phone">Phone:</label>
-            <input type="text" id="phone" name="phone" required><br><br>
-            <label for="joining_date">Joining Date:</label>
-            <input type="date" id="joining_date" name="joining_date" required><br><br>
-            <label for="department">Department:</label>
-            <select id="department" name="department" required>
-                <option value="HR">HR</option>
-                <option value="Engineering">Engineering</option>
-                <option value="Marketing">Marketing</option>
-            </select><br><br>
-            <label for="qualification">Qualification:</label>
-            <input type="text" id="qualification" name="qualification" required><br><br>
-            <button type="submit">Add Employee</button>
-        </form>
+        <div class="form-container">
+            <form action="/add-employee" method="post" onsubmit="showSuccessMessage(event)">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone:</label>
+                    <input type="text" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="joining_date">Joining Date:</label>
+                    <input type="date" id="joining_date" name="joining_date" required>
+                </div>
+                <div class="form-group">
+                    <label for="department">Department:</label>
+                    <select id="department" name="department" required>
+                        <option value="HR">HR</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="Marketing">Marketing</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="qualification">Qualification:</label>
+                    <input type="text" id="qualification" name="qualification" required>
+                </div>
+                <button type="submit">Add Employee</button>
+            </form>
+        </div>
+        <div class="button-container">
+            <div class="back-button">
+                <a href="#" onclick="history.back();">Back</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>

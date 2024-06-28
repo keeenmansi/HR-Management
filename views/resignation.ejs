@@ -2,23 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Resignation</title>
+    <title>Resignation Form</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #66644d;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+            padding: 20px;
         }
         form {
-            width: 50%;
-            background-color: #ffffff;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #f9f9f9;
             padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         label {
             display: block;
@@ -29,30 +25,66 @@
             padding: 8px;
             margin-bottom: 15px;
             border: 1px solid #ccc;
-            border-radius: 3px;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
-        button[type="submit"] {
+        button {
             padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
+            background-color: #4CAF50;
+            color: white;
             border: none;
-            border-radius: 3px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .back-container {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .back-button {
+            padding: 10px 20px;
+            background-color: #cc3333; /* Darker red color */
+            color: white;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
         }
-        button[type="submit"]:hover {
-            background-color: #0056b3;
+        .back-button:hover {
+            background-color: #b32424; /* Darker shade of red on hover */
         }
     </style>
 </head>
 <body>
-    <form action="/resignation" method="post">
-        <label for="employee_name">Employee Name:</label>
-        <input type="text" id="employee_name" name="employee_name" required><br><br>
-        <label for="resignation_date">Resignation Date:</label>
-        <input type="date" id="resignation_date" name="resignation_date" required><br><br>
+    <h1>Resignation Form</h1>
+
+    <!-- Resignation Form -->
+    <form action="/submit-resignation" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
         <label for="reason">Reason for Resignation:</label>
-        <textarea id="reason" name="reason" rows="4" required></textarea><br><br>
+        <textarea id="reason" name="reason" rows="4" required></textarea>
+
         <button type="submit">Submit Resignation</button>
     </form>
+
+    <!-- Back Button at the bottom -->
+    <div class="back-container">
+        <button class="back-button" onclick="goBack()">Back</button>
+    </div>
+
+    <script>
+        // Function to navigate back
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 </body>
 </html>

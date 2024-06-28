@@ -1,5 +1,5 @@
 {
-  "name": "employee-management",
+  "name": "express",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
@@ -16,5 +15,14 @@
     "express": "^4.19.2",
     "nodemailer": "^6.9.14",
     "pg": "^8.12.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keeenmansi/HR-Management.git"
+  },
+  "bugs": {
+    "url": "https://github.com/keeenmansi/HR-Management/issues"
+  },
+  "homepage": "https://github.com/keeenmansi/HR-Management#readme",
+  "description": ""
 }
