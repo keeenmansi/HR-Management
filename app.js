@@ -52,7 +52,12 @@ app.post('/login', (req, res) => {
 app.get('/home', (req, res) => {
     res.render('home');
 });
-// Add Employee
+
+// Render Add Employee Form
+app.get('/add-employee', (req, res) => {
+  res.render('add-employee');
+});
+
 app.post('/add-employee', async (req, res) => {
   const { name, email, phone, joining_date, department, qualification } = req.body;
 
@@ -66,11 +71,52 @@ app.post('/add-employee', async (req, res) => {
   }
 });
 
-
 // Show Employees
 app.get('/show-employees', async (req, res) => {
     const result = await pool.query('SELECT * FROM employees');
     res.render('show-employees', { employees: result.rows });
+});
+
+// Search Employees
+app.get('/search-employees', async (req, res) => {
+  const searchQuery = req.query.search || '';
+  try {
+      const result = await pool.query('SELECT * FROM employees WHERE name ILIKE $1 OR department ILIKE $1', [`%${searchQuery}%`]);
+      res.render('show-employees', { employees: result.rows });
+  } catch (err) {
+      console.error('Error searching employees:', err);
+      res.status(500).send('Error searching employees');
+  }
+});
+
+// Render Edit Employee Form
+app.get('/edit-employee/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const result = await pool.query('SELECT * FROM employees WHERE id = $1', [id]);
+        const employee = result.rows[0];
+        if (!employee) {
+            return res.status(404).send('Employee not found');
+        }
+        res.render('edit-employee', { employee });
+    } catch (err) {
+        console.error('Error retrieving employee:', err);
+        res.status(500).send('Error retrieving employee');
+    }
+});
+
+// Handle Edit Employee Form Submission
+app.post('/update-employee/:id', async (req, res) => {
+    const { id } = req.params;
+    const { name, email, phone, joining_date, department, qualification } = req.body;
+
+    try {
+        await pool.query('UPDATE employees SET name = $1, email = $2, phone = $3, joining_date = $4, department = $5, qualification = $6 WHERE id = $7', [name, email, phone, joining_date, department, qualification, id]);
+        res.redirect('/show-employees');
+    } catch (err) {
+        console.error('Error updating employee:', err);
+        res.status(500).send('Error updating employee');
+    }
 });
 
 // Delete Employee
@@ -100,49 +146,49 @@ app.post('/delete-employee/:id', async (req, res) => {
 
 // Resignation Page
 app.get('/resignation', (req, res) => {
-    res.render('resignation');
+  res.render('resignation');
 });
 
 app.post('/submit-resignation', async (req, res) => {
-    const { name, email, reason } = req.body;
+  const { id, name, email, reason } = req.body;
 
-    // Send resignation email to all employees
-    await sendResignationEmail(name);
+  // Send resignation email to all employees
+  await sendResignationEmail(id, name);
 
-    res.send(`Resignation notification sent for ${name}`);
+  res.send(`Resignation notification sent for ${name} (ID: ${id})`);
 });
 
-async function sendResignationEmail(employeeName) {
-    const mailOptions = {
-        from: 'mansi_01@fosteringlinux.com',
-        to: 'allemployees@company.com', // Update with recipient email for all employees
-        subject: 'Resignation Notification',
-        text: `${employeeName} has resigned from the company. Please take necessary actions.`
-    };
+async function sendResignationEmail(employeeId, employeeName) {
+  const mailOptions = {
+      from: 'mansi_01@fosteringlinux.com',
+      to: 'allemployees@company.com', // Update with recipient email for all employees
+      subject: 'Resignation Notification',
+      text: `${employeeName} (ID: ${employeeId}) has resigned from the company. Please take necessary actions.`
+  };
 
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Resignation notification sent: ' + info.response);
-        }
-    });
+  transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+          console.log(error);
+      } else {
+          console.log('Resignation notification sent: ' + info.response);
+      }
+  });
 
-    // Send email to Raju Sir to deactivate the employee ID
-    const rajusirMailOptions = {
-        from: 'mansi_01@fosteringlinux.com',
-        to: 'raju_sir@company.com', // Update with Raju Sir's email
-        subject: 'Deactivate Employee ID',
-        text: `${employeeName}'s ID needs to be deactivated. Please deactivate the account.`
-    };
+  // Send email to Raju Sir to deactivate the employee ID
+  const rajuSirMailOptions = {
+      from: 'mansi_01@fosteringlinux.com',
+      to: 'raju_sir@company.com', // Update with Raju Sir's email
+      subject: 'Deactivate Employee ID',
+      text: `${employeeName}'s (ID: ${employeeId}) ID needs to be deactivated. Please deactivate the account.`
+  };
 
-    transporter.sendMail(rajuSirMailOptions, (error, info) => {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Deactivation request sent to Raju Sir: ' + info.response);
-        }
-    });
+  transporter.sendMail(rajuSirMailOptions, (error, info) => {
+      if (error) {
+          console.log(error);
+      } else {
+          console.log('Deactivation request sent to Raju Sir: ' + info.response);
+      }
+  });
 }
 
 // Start the server
