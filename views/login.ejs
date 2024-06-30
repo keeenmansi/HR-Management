@@ -4,106 +4,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="h-screen bg-neutral-200 dark:bg-neutral-700 flex items-center justify-center">
 
-    <section>
+    <section class="container h-full p-10 flex items-center justify-center">
+        <div class="bg-white dark:bg-neutral-800 shadow-lg rounded-lg flex flex-col lg:flex-row w-full max-w-4xl">
 
-        <div class="container h-full p-10 flex items-center justify-center">
-            <div class="flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
-
-                <div class="block rounded-lg bg-white shadow-lg dark:bg-neutral-800 justify-center items-center">
-                    <div class=" gird flex  justify-center items-center  ">
-                        <div class="  bg-white w-[700px] m-12">
-                            <div class="px-4 md:px-0 lg:w-full">
-                                <div class="md:mx-6 md:p-12">
-                                    <!--Logo-->
-                                    <div class="text-center">
-
-                                        <img class="mx-auto w-48" src="/images/keen-removebg-preview.png" alt="logo" />
-
-                                        <h4 class="mb-12 mt-1 pb-1 text-xl font-semibold">
-                                            Always Been Open!
-                                        </h4>
-                                    </div>
-
-                                    <form action="/login" method="post">
-                                        <p class="mb-4">Please login to your account</p>
-                                        <!--Username input-->
-                                        <div class="relative mb-4" data-twe-input-wrapper-init>
-                                            <input type="text" id="username" name="username"
-                                                class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0">
-
-                                            <label for="username"
-                                                class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[twe-input-state-active]:-translate-y-[0.9rem] peer-data-[twe-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-400 dark:peer-focus:text-primary">Username
-                                            </label>
-                                        </div>
-
-                                        <!--Password input-->
-                                        <div class="relative mb-4" data-twe-input-wrapper-init>
-                                            <input type="password" id="password" name="password"
-                                                class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[twe-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill dark:peer-focus:text-primary [&:not([data-twe-input-placeholder-active])]:placeholder:opacity-0">
-
-                                            <label for="exampleFormControlInput11"
-                                                class="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[twe-input-state-active]:-translate-y-[0.9rem] peer-data-[twe-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-400 dark:peer-focus:text-primary">Password
-                                            </label>
-                                        </div>
-
-                                        <!--Submit button-->
-                                        <div class="mb-12 pb-1 pt-1 text-center">
-                                            <button type="submit" data-twe-ripple-init data-twe-ripple-color="light"
-                                                class="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-dark-3 transition duration-150 ease-in-out hover:shadow-dark-2 focus:shadow-dark-2 focus:outline-none focus:ring-0 active:shadow-dark-2 dark:shadow-black/30 dark:hover:shadow-dark-strong dark:focus:shadow-dark-strong dark:active:shadow-dark-strong"
-                                                style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);">Login</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class=" flex justify-center items-center ">
-                            <!-- Right column container with background and description-->
-                            <div class="hidden lg:flex items-center justify-center rounded-b-lg lg:rounded-e-lg lg:rounded-bl-none h-[80vh] m-2"
-                                style="background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593)">
-                                <div class="px-4 py-6 text-white md:mx-6 md:p-12 text-center">
-                                    <h4 class="mb-6 text-xl font-semibold">
-                                        Unlearning and Learning Together
-                                    </h4>
-                                    <p class="text-sm">
-                                        Born out of a necessity, FL started in 2006. Our parent, Open Source IT
-                                        Consulting company, Keen and Able (KNA), had a consistent need to find relevant
-                                        people. Paucity of right personnel was impacting business. We realised that most
-                                        of the schools and colleges are unable to instil the skills, depth, initiative
-                                        and application required by people in their careers. We were confident that
-                                        since we knew what customers needed, we would be able to impart practicality to
-                                        the learning process and prepare people who are ready to work in the real world
-                                        out there...
-                                    </p>
-
-                                    <p class="text-sm">
-                                        FL has always been about people. WE do not claim that we can 'train' people
-                                        well. What we try to achieve is provide an all rounded learning environment to
-                                        joinees to help them think, think openly. We have realised that our education
-                                        system does not promote querying. We try to instil a knack of asking questions
-                                        in our pupil. We firmly believe that once we get into the habit of asking the
-                                        right questions, we can find all the relevant answers.
-                                    </p>
-
-                                </div>
-                            </div>
-                        </div>
-
+            <!-- Left Column -->
+            <div class="w-full lg:w-1/2 p-12 flex flex-col items-center justify-center">
+                <div class="w-full max-w-sm">
+                    <!-- Logo -->
+                    <div class="text-center mb-8">
+                        <img class="mx-auto w-48" src="/images/keen-removebg-preview.png" alt="logo" />
+                        <h4 class="mt-4 text-xl font-semibold">Always Been Open!</h4>
                     </div>
+
+                    <!-- Login Form -->
+                    <form action="/login" method="post">
+                        <p class="mb-4">Please login to your account</p>
+
+                        <!-- Username input -->
+                        <div class="relative mb-4">
+                            <input type="text" id="username" name="username"
+                                class="peer block w-full rounded border border-gray-300 bg-white px-3 py-2 leading-6 outline-none transition-all duration-200 ease-linear focus:border-blue-500 focus:shadow-md dark:bg-neutral-800 dark:border-neutral-600 dark:text-white"
+                                placeholder="Username" />
+                            <!-- <label for="username"
+                                class="absolute left-3 top-1.5 text-gray-500 transition-all duration-200 ease-out transform -translate-y-4 scale-75 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-1/2 peer-focus:scale-75 peer-focus:-translate-y-4">Username</label> -->
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="relative mb-4">
+                            <input type="password" id="password" name="password"
+                                class="peer block w-full rounded border border-gray-300 bg-white px-3 py-2 leading-6 outline-none transition-all duration-200 ease-linear focus:border-blue-500 focus:shadow-md dark:bg-neutral-800 dark:border-neutral-600 dark:text-white"
+                                placeholder="Password" />
+                            <!-- <label for="password"
+                                class="absolute left-3 top-1.5 text-gray-500 transition-all duration-200 ease-out transform -translate-y-4 scale-75 origin-[0] peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-1/2 peer-focus:scale-75 peer-focus:-translate-y-4">Password</label> -->
+                        </div>
+
+                        <!-- Submit button -->
+                        <div class="text-center">
+                            <button type="submit"
+                                class="w-full rounded bg-gradient-to-r from-orange-500 to-pink-600 text-white py-2.5 px-6 font-medium uppercase leading-normal shadow-lg transition duration-150 ease-in-out hover:shadow-xl focus:outline-none">Login</button>
+                        </div>
+                    </form>
                 </div>
             </div>
+
+            <!-- Right Column -->
+            <div class="hidden lg:flex items-center justify-center w-full lg:w-1/2 bg-gradient-to-r from-orange-500 to-pink-600 text-white p-12 rounded-r-lg">
+                <div class="text-center">
+                    <h4 class="mb-6 text-xl font-semibold">Unlearning and Learning Together</h4>
+                    <p class="text-sm mb-4">
+                        Born out of a necessity, FL started in 2006. Our parent, Open Source IT Consulting company,
+                        Keen and Able (KNA), had a consistent need to find relevant people. Paucity of right
+                        personnel was impacting business. We realised that most of the schools and colleges are
+                        unable to instil the skills, depth, initiative and application required by people in their
+                        careers. We were confident that since we knew what customers needed, we would be able to
+                        impart practicality to the learning process and prepare people who are ready to work in the
+                        real world out there...
+                    </p>
+                    <p class="text-sm">
+                        FL has always been about people. WE do not claim that we can 'train' people well. What we
+                        try to achieve is provide an all rounded learning environment to joinees to help them think,
+                        think openly. We have realised that our education system does not promote querying. We try
+                        to instil a knack of asking questions in our pupil. We firmly believe that once we get into
+                        the habit of asking the right questions, we can find all the relevant answers.
+                    </p>
+                </div>
+            </div>
+
         </div>
-
-
-
     </section>
+
 </body>
 
 </html>

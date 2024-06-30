@@ -144,54 +144,38 @@ app.post('/delete-employee/:id', async (req, res) => {
     res.redirect('/show-employees');
 });
 
-// Resignation Page
+// Render Resignation Form
 app.get('/resignation', (req, res) => {
-  res.render('resignation');
+    res.render('resignation');
 });
 
+// Handle Resignation Form Submission
 app.post('/submit-resignation', async (req, res) => {
-  const { id, name, email, reason } = req.body;
+    const { employeeName, employeeId, reason } = req.body;
 
-  // Send resignation email to all employees
-  await sendResignationEmail(id, name);
+    // Send email to specific recipient (amitraz133@gmail.com)
+    let recipientMailOptions = {
+        from: 'mansi_01@fosteringlinux.com',
+        to: 'amitraz133@gmail.com', // Updated to send to a specific email instead of group
+        subject: 'Employee Resignation Notification',
+        text: `${employeeName} (ID: ${employeeId}) has resigned from the company. Reason: ${reason}`
+    };
 
-  res.send(`Resignation notification sent for ${name} (ID: ${id})`);
-});
+    // Send email to admin
+    let adminMailOptions = {
+        from: 'mansi_01@fosteringlinux.com',
+        to: 'mansinawariya1@gmail.com', // admin email
+        subject: 'Deactivate Employee ID',
+        text: `Please deactivate the ID of ${employeeName} (ID: ${employeeId}).`
+    };
 
-async function sendResignationEmail(employeeId, employeeName) {
-  const mailOptions = {
-      from: 'mansi_01@fosteringlinux.com',
-      to: 'allemployees@company.com', // Update with recipient email for all employees
-      subject: 'Resignation Notification',
-      text: `${employeeName} (ID: ${employeeId}) has resigned from the company. Please take necessary actions.`
-  };
+    try {
+        await transporter.sendMail(recipientMailOptions); // Sending to specific email
+        await transporter.sendMail(adminMailOptions);
 
-  transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-          console.log(error);
-      } else {
-          console.log('Resignation notification sent: ' + info.response);
-      }
-  });
-
-  // Send email to Raju Sir to deactivate the employee ID
-  const rajuSirMailOptions = {
-      from: 'mansi_01@fosteringlinux.com',
-      to: 'raju_sir@company.com', // Update with Raju Sir's email
-      subject: 'Deactivate Employee ID',
-      text: `${employeeName}'s (ID: ${employeeId}) ID needs to be deactivated. Please deactivate the account.`
-  };
-
-  transporter.sendMail(rajuSirMailOptions, (error, info) => {
-      if (error) {
-          console.log(error);
-      } else {
-          console.log('Deactivation request sent to Raju Sir: ' + info.response);
-      }
-  });
-}
-
-// Start the server
-app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+        res.send('Resignation submitted successfully.');
+    } catch (error) {
+        console.error('Error sending emails:', error);
+        res.status(500).send('There was an error submitting the resignation.');
+    }
 });
