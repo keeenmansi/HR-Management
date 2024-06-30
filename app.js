@@ -153,24 +153,24 @@ app.get('/resignation', (req, res) => {
 app.post('/submit-resignation', async (req, res) => {
     const { employeeName, employeeId, reason } = req.body;
 
-    // Send email to specific recipient (amitraz133@gmail.com)
-    let recipientMailOptions = {
-        from: 'mansi_01@fosteringlinux.com',
-        to: 'amitraz133@gmail.com', // Updated to send to a specific email instead of group
-        subject: 'Employee Resignation Notification',
-        text: `${employeeName} (ID: ${employeeId}) has resigned from the company. Reason: ${reason}`
-    };
-
     // Send email to admin
-    let adminMailOptions = {
-        from: 'mansi_01@fosteringlinux.com',
-        to: 'mansinawariya1@gmail.com', // admin email
-        subject: 'Deactivate Employee ID',
-        text: `Please deactivate the ID of ${employeeName} (ID: ${employeeId}).`
-    };
+let adminMailOptions = {
+    from: 'mansi_01@fosteringlinux.com',
+    to: 'mansinawariya1@gmail.com', // admin email
+    subject: 'Deactivate Employee ID',
+    text: `Dear Team / Raju,
+
+This is to inform you that ${employeeName}  has resigned from the company.
+Please deactivate the ID of "${employeeName}" (ID: "${employeeId}").
+
+Regards,
+HR Team`
+};
+
+   
 
     try {
-        await transporter.sendMail(recipientMailOptions); // Sending to specific email
+        await transporter.sendMail(adminMailOptions);
         await transporter.sendMail(adminMailOptions);
 
         res.send('Resignation submitted successfully.');
@@ -178,4 +178,9 @@ app.post('/submit-resignation', async (req, res) => {
         console.error('Error sending emails:', error);
         res.status(500).send('There was an error submitting the resignation.');
     }
+});
+
+// Start the server
+app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
 });
