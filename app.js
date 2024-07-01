@@ -153,24 +153,49 @@ app.get('/resignation', (req, res) => {
 app.post('/submit-resignation', async (req, res) => {
     const { employeeName, employeeId, reason } = req.body;
 
-    // Send email to admin
-let adminMailOptions = {
+    // Send email to all employees
+let allEmpMailOptions = {
     from: 'mansi_01@fosteringlinux.com',
-    to: 'mansinawariya1@gmail.com', // admin email
-    subject: 'Deactivate Employee ID',
-    text: `Dear Team / Raju,
+    to: 'mansunawariya@gmail.com', // replace with the actual all employees group email
+    subject:`Employee Resignation Notification - ${employeeName}`,
+    text: `Dear Team,
 
-This is to inform you that ${employeeName}  has resigned from the company.
-Please deactivate the ID of "${employeeName}" (ID: "${employeeId}").
+This is to inform all of you that ${employeeName} has resigned from our company, Keenable. We appreciate the contributions and efforts that ${employeeName} has made during their tenure with us.
 
-Regards,
-HR Team`
+
+Best regards,
+HR
+`
+
 };
 
-   
+    // Send email to admin
+    const adminMailOptions = {
+        from: 'mansi_01@fosteringlinux.com',
+        to: 'mansinawariya1@gmail.com', // admin email
+        subject: 'Deactivate Employee ID',
+        text: `Dear Raju Sir,
+
+I hope this email finds you well.
+
+I am writing to inform you that the following employee will be leaving the office:
+
+Name: ${employeeName}
+ID: ${employeeId}
+
+Kindly proceed with deactivating the employee's ID at your earliest convenience.
+
+Thank you for your prompt attention to this matter.
+
+Best regards,
+
+HR`
+    };
+
+
 
     try {
-        await transporter.sendMail(adminMailOptions);
+        await transporter.sendMail(allEmpMailOptions);
         await transporter.sendMail(adminMailOptions);
 
         res.send('Resignation submitted successfully.');
